@@ -5,11 +5,8 @@ GO
 
 CREATE SCHEMA STAGING
 GO
-
 --denormalizing the Locations Tables --
-
 -- CREATING A LOCATION LOOKUP TABLE --
-
 USE [GROUP_OLTP]
 SELECT 
 LF.[LocationFact_ID_PK],
@@ -45,7 +42,6 @@ LEFT JOIN
 GO
 
 -- create a view for the locations lookup table --
-
 USE [GROUP_OLTP]
 GO
 
@@ -115,8 +111,6 @@ CREATE TABLE STAGING.LocationLookUp(
     [Water Area] float
 )
 GO
-
-
 -- creating the Product Lookup Table by denormalizing related tables in the snowflake schema model --
 USE [GROUP_OLTP]
 SELECT  
@@ -132,7 +126,6 @@ PF.[Taxes]
 FROM [OLTP].[Product_Fact] PF 
 LEFT JOIN [OLTP].[Product_Dim] PD ON PF.Product_ID_FK = PD.Product_ID_PK
 GO
-
 --product look up table --
 USE [GROUP_STAGING]
 DROP TABLE IF EXISTS STAGING.ProductLookUp
